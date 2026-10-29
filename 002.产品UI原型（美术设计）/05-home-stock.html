@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>库存总览 · 物资系统</title>
+<link rel="stylesheet" href="assets/theme.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ============ 侧边栏 ============ -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">资</div>
+      <div>
+        <div class="brand-name">物资系统</div>
+        <div class="brand-sub">出入库管理</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <div class="nav-group-label">快捷操作</div>
+      <a class="nav-item" href="07-inbound-new.html">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        物资入库 <span class="tag">I</span>
+      </a>
+      <a class="nav-item" href="08-outbound-new.html">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></svg>
+        物资出库 <span class="tag">O</span>
+      </a>
+
+      <div class="nav-group-label">查询</div>
+      <a class="nav-item" href="05-home-stock.html">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>
+        库存总览
+      </a>
+      <a class="nav-item" href="09-inbound-list.html">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+        入库记录
+      </a>
+      <a class="nav-item" href="10-outbound-list.html">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+        出库记录
+      </a>
+
+      <div class="nav-group-label">基础数据</div>
+      <a class="nav-item" href="06-items.html">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>
+        物资档案
+      </a>
+      <a class="nav-item" href="11-receivers.html">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        出库对象
+      </a>
+      <a class="nav-item" href="12-users.html">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>
+        人员信息 <span class="tag gray">仅管理员</span>
+      </a>
+    </nav>
+    <div class="side-foot">v1.0 · UI 原型</div>
+  </aside>
+
+  <!-- ============ 主区域 ============ -->
+  <div class="main">
+    <header class="topbar">
+      <div class="crumb">物资系统 / <b>库存总览</b></div>
+      <div class="top-search">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input class="input" placeholder="搜索物资 / 订单号">
+      </div>
+      <div class="usermenu">
+        <div class="avatar">张</div>
+        <div>
+          <div class="who">张三</div>
+          <div class="role">管理员</div>
+        </div>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </header>
+
+    <main class="page">
+
+      <div class="page-head">
+        <div>
+          <h1>库存总览</h1>
+          <div class="sub">2026 年 10 月 26 日 · 星期一 · 全部物资结存</div>
+        </div>
+        <div class="page-actions">
+          <a class="btn" href="06-items.html">物资档案</a>
+          <a class="btn" href="08-outbound-new.html">物资出库</a>
+          <a class="btn primary" href="07-inbound-new.html">＋ 物资入库</a>
+        </div>
+      </div>
+
+      <!-- KPI 行 -->
+      <div class="stat-row">
+        <div class="stat-tile">
+          <div class="label">在库物资</div>
+          <div class="value">128<span class="unit">种</span></div>
+          <div class="note">其中 15 种结存为 0</div>
+        </div>
+        <div class="stat-tile">
+          <div class="label">库存总值</div>
+          <div class="value">¥12,486</div>
+          <div class="note">按当前零售价计算</div>
+        </div>
+        <div class="stat-tile">
+          <div class="label">本月入库</div>
+          <div class="value">¥3,210</div>
+          <div class="spark">
+            <svg viewBox="0 0 240 26" fill="none" aria-hidden="true">
+              <path d="M0 20 L22 17 L44 19 L66 12 L88 15 L110 9 L132 12 L154 6 L176 9 L198 4 L220 6 L240 2"
+                    stroke="var(--spark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="240" cy="2" r="4" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"/>
+            </svg>
+          </div>
+        </div>
+        <div class="stat-tile">
+          <div class="label">本月出库</div>
+          <div class="value">¥860</div>
+          <div class="spark">
+            <svg viewBox="0 0 240 26" fill="none" aria-hidden="true">
+              <path d="M0 8 L22 11 L44 9 L66 14 L88 12 L110 17 L132 14 L154 19 L176 16 L198 21 L220 18 L240 22"
+                    stroke="var(--spark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="240" cy="22" r="4" fill="var(--series-1)" stroke="var(--surface)" stroke-width="2"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- 快捷入口 -->
+      <div class="quick-grid">
+        <a class="quick" href="07-inbound-new.html">
+          <span class="qi in"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+          <span>
+            <span class="qt">物资入库</span>
+            <span class="qs">拼音码 → 数量 + 订单编号</span>
+          </span>
+          <span class="qk">I</span>
+        </a>
+        <a class="quick" href="08-outbound-new.html">
+          <span class="qi out"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14"/></svg></span>
+          <span>
+            <span class="qt">物资出库</span>
+            <span class="qs">拼音码 → 数量 + 出库到个人</span>
+          </span>
+          <span class="qk">O</span>
+        </a>
+        <a class="quick" href="06-items.html">
+          <span class="qi item"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg></span>
+          <span>
+            <span class="qt">新增物资</span>
+            <span class="qs">品名 / 单位 / 零售价 / 平台 / 拼音码</span>
+          </span>
+          <span class="qk">N</span>
+        </a>
+      </div>
+
+      <!-- 库存清单 -->
+      <div class="card">
+        <div class="card-head">
+          <h3>库存清单</h3>
+          <span class="sub" id="cnt">共 128 条</span>
+          <div class="right">
+            <a class="btn sm" href="09-inbound-list.html">全部入库记录</a>
+            <a class="btn sm" href="10-outbound-list.html">全部出库记录</a>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <input class="input search" id="q" placeholder="拼音码 / 品名 / 平台">
+          <select class="select" id="plat">
+            <option>全部平台</option>
+            <option>淘宝</option><option>天猫</option><option>京东</option>
+            <option>拼多多</option><option>1688</option><option>线下</option>
+          </select>
+          <span class="chip on" id="c1">只看有结存</span>
+          <span class="chip" id="c2">只看零结存</span>
+          <div class="right">
+            <span class="badge info">结存 = 累计入库 − 累计出库</span>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="tbl" id="stockTbl">
+            <thead>
+              <tr>
+                <th style="width:96px">拼音码</th>
+                <th>品名</th>
+                <th style="width:70px">单位</th>
+                <th class="num" style="width:90px">结存</th>
+                <th class="num" style="width:96px">零售价</th>
+                <th class="num" style="width:110px">库存金额</th>
+                <th style="width:100px">购买平台</th>
+                <th style="width:140px">最近变动</th>
+                <th style="width:150px">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="mono" style="color:var(--ink-2)">wsm</span></td>
+                <td class="strong">无线鼠标</td>
+                <td class="muted">个</td>
+                <td class="num strong">3</td>
+                <td class="num">¥29.90</td>
+                <td class="num">¥89.70</td>
+                <td><span class="badge">淘宝</span></td>
+                <td class="muted">10-26 12:30</td>
+                <td><div class="rowacts"><a class="btn" href="07-inbound-new.html">入库</a><a class="btn" href="08-outbound-new.html">出库</a></div></td>
+              </tr>
+              <tr>
+                <td><span class="mono" style="color:var(--ink-2)">sjx</span></td>
+                <td class="strong">数据线</td>
+                <td class="muted">条</td>
+                <td class="num strong">12</td>
+                <td class="num">¥12.90</td>
+                <td class="num">¥154.80</td>
+                <td><span class="badge">拼多多</span></td>
+                <td class="muted">10-26 10:02</td>
+                <td><div class="rowacts"><a class="btn" href="07-inbound-new.html">入库</a><a class="btn" href="08-outbound-new.html">出库</a></div></td>
+              </tr>
+              <tr>
+                <td><span class="mono" style="color:var(--ink-2)">zm</span></td>
+                <td class="strong">签字笔</td>
+                <td class="muted">支</td>
+                <td class="num strong">26</td>
+                <td class="num">¥3.50</td>
+                <td class="num">¥91.00</td>
+                <td><span class="badge">淘宝</span></td>
+                <td class="muted">10-25 17:40</td>
+                <td><div class="rowacts"><a class="btn" href="07-inbound-new.html">入库</a><a class="btn" href="08-outbound-new.html">出库</a></div></td>
+              </tr>
+              <tr>
+                <td><span class="mono" style="color:var(--ink-2)">cs</span></td>
+                <td class="strong">抽纸</td>
+                <td class="muted">提</td>
+                <td class="num strong">7</td>
+                <td class="num">¥32.00</td>
+                <td class="num">¥224.00</td>
+                <td><span class="badge">天猫</span></td>
+                <td class="muted">10-25 09:15</td>
+                <td><div class="rowacts"><a class="btn" href="07-inbound-new.html">入库</a><a class="btn" href="08-outbound-new.html">出库</a></div></td>
+              </tr>
+              <tr>
+                <td><span class="mono" style="color:var(--ink-2)">ch</span></td>
+                <td class="strong">插线板</td>
+                <td class="muted">个</td>
+                <td class="num strong">3</td>
+                <td class="num">¥45.00</td>
+                <td class="num">¥135.00</td>
+                <td><span class="badge">京东</span></td>
+                <td class="muted">10-24 15:48</td>
+                <td><div class="rowacts"><a class="btn" href="07-inbound-new.html">入库</a><a class="btn" href="08-outbound-new.html">出库</a></div></td>
+              </tr>
+              <tr>
+                <td><span class="mono" style="color:var(--ink-2)">lb</span></td>
+                <td class="strong">垃圾袋</td>
+                <td class="muted">卷</td>
+                <td class="num strong">15</td>
+                <td class="num">¥9.90</td>
+                <td class="num">¥148.50</td>
+                <td><span class="badge">拼多多</span></td>
+                <td class="muted">10-24 11:20</td>
+                <td><div class="rowacts"><a class="btn" href="07-inbound-new.html">入库</a><a class="btn" href="08-outbound-new.html">出库</a></div></td>
+              </tr>
+              <tr>
+                <td><span class="mono" style="color:var(--ink-2)">yj</span></td>
+                <td class="strong">文件夹</td>
+                <td class="muted">个</td>
+                <td class="num strong">18</td>
+                <td class="num">¥4.50</td>
+                <td class="num">¥81.00</td>
+                <td><span class="badge">淘宝</span></td>
+                <td class="muted">10-23 16:05</td>
+                <td><div class="rowacts"><a class="btn" href="07-inbound-new.html">入库</a><a class="btn" href="08-outbound-new.html">出库</a></div></td>
+              </tr>
+              <tr>
+                <td><span class="mono" style="color:var(--ink-2)">a4z</span></td>
+                <td class="strong">A4 纸</td>
+                <td class="muted">包</td>
+                <td class="num strong" style="color:var(--ink-3)">0</td>
+                <td class="num">¥23.00</td>
+                <td class="num muted">¥0.00</td>
+                <td><span class="badge">京东</span></td>
+                <td class="muted">10-22 14:33</td>
+                <td><div class="rowacts"><a class="btn" href="07-inbound-new.html">入库</a><a class="btn disabled" title="结存为 0">出库</a></div></td>
+              </tr>
+              <tr>
+                <td><span class="mono" style="color:var(--ink-2)">wjx</span></td>
+                <td class="strong">文件夹架</td>
+                <td class="muted">个</td>
+                <td class="num strong" style="color:var(--ink-3)">0</td>
+                <td class="num">¥35.00</td>
+                <td class="num muted">¥0.00</td>
+                <td><span class="badge">1688</span></td>
+                <td class="muted">10-20 10:10</td>
+                <td><div class="rowacts"><a class="btn" href="07-inbound-new.html">入库</a><a class="btn disabled" title="结存为 0">出库</a></div></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="empty" data-filter-empty style="display:none">
+            <div class="ei"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
+            <h4>没有匹配的物资</h4>
+            <p>换个拼音码或品名试试</p>
+          </div>
+        </div>
+
+        <div class="pager">
+          <span>显示 1–9 条，共 128 条</span>
+          <div class="pages">
+            <span class="pg">‹</span><span class="pg active">1</span><span class="pg">2</span>
+            <span class="pg">3</span><span class="pg">…</span><span class="pg">15</span><span class="pg">›</span>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div class="toast-wrap"></div>
+
+<script src="assets/app.js"></script>
+<script>
+  initFilter('#q', '#stockTbl');
+
+  document.getElementById('plat').addEventListener('change', function () {
+    var v = this.value;
+    var shown = 0;
+    $$('#stockTbl tbody tr').forEach(function (tr) {
+      var hit = v === '全部平台' || tr.textContent.indexOf(v) >= 0;
+      tr.style.display = hit ? '' : 'none';
+      if (hit) shown++;
+    });
+  });
+
+  var c1 = document.getElementById('c1'), c2 = document.getElementById('c2');
+  c1.onclick = function () { c1.classList.toggle('on'); c2.classList.remove('on'); };
+  c2.onclick = function () { c2.classList.toggle('on'); c1.classList.remove('on'); };
+</script>
+</body>
+</html>

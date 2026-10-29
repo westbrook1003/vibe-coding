@@ -1,0 +1,17 @@
+{
+  "name": "material-system",
+  "version": "1.0.0",
+  "description": "物资出入库管理系统 · 全栈工程聚合脚本",
+  "private": true,
+  "scripts": {
+    "setup": "npm --prefix backend install && npm --prefix frontend install",
+    "dev:backend": "npm --prefix backend run start:dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "seed": "npm --prefix backend run seed",
+    "db:recalc": "npm --prefix backend run db:recalc",
+    "build": "npm --prefix backend run build && npm --prefix frontend run build",
+    "typecheck": "npm --prefix backend run typecheck && npm --prefix frontend run typecheck",
+    "lint": "npm --prefix frontend run lint",
+    "db:query": "npm --prefix backend run db:query --"
+  }
+}

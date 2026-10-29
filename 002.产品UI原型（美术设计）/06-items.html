@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>物资档案 · 物资系统</title>
+<link rel="stylesheet" href="assets/theme.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">资</div>
+      <div>
+        <div class="brand-name">物资系统</div>
+        <div class="brand-sub">出入库管理</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <div class="nav-group-label">快捷操作</div>
+      <a class="nav-item" href="07-inbound-new.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>物资入库 <span class="tag">I</span></a>
+      <a class="nav-item" href="08-outbound-new.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></svg>物资出库 <span class="tag">O</span></a>
+      <div class="nav-group-label">查询</div>
+      <a class="nav-item" href="05-home-stock.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>库存总览</a>
+      <a class="nav-item" href="09-inbound-list.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>入库记录</a>
+      <a class="nav-item" href="10-outbound-list.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>出库记录</a>
+      <div class="nav-group-label">基础数据</div>
+      <a class="nav-item" href="06-items.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>物资档案</a>
+      <a class="nav-item" href="11-receivers.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>出库对象</a>
+      <a class="nav-item" href="12-users.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>人员信息 <span class="tag gray">仅管理员</span></a>
+    </nav>
+    <div class="side-foot">v1.0 · UI 原型</div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="crumb">物资系统 / <b>物资档案</b></div>
+      <div class="top-search">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input class="input" placeholder="搜索物资 / 单据 / 订单号">
+      </div>
+      <div class="usermenu">
+        <div class="avatar">张</div>
+        <div><div class="who">张三</div><div class="role">管理员</div></div>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="page-head">
+        <div>
+          <h1>物资档案</h1>
+          <div class="sub">维护品名、单位、零售价、购买平台与拼音码；入库出库时按拼音码直接带出</div>
+        </div>
+        <div class="page-actions">
+          <button class="btn primary" onclick="openModal('mNew')">＋ 新增物资</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <input class="input search" id="q" placeholder="拼音码 / 品名 / 平台">
+          <select class="select" id="plat">
+            <option>全部平台</option>
+            <option>淘宝</option><option>天猫</option><option>京东</option>
+            <option>拼多多</option><option>1688</option><option>线下</option>
+          </select>
+          <select class="select"><option>全部状态</option><option>启用</option><option>停用</option></select>
+          <div class="right"><span class="badge info">拼音码不校验唯一，重复时列表全部列出</span></div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="tbl" id="itemTbl">
+            <thead>
+              <tr>
+                <th style="width:110px">拼音码</th>
+                <th>品名</th>
+                <th style="width:80px">单位</th>
+                <th class="num" style="width:100px">零售价</th>
+                <th style="width:110px">购买平台</th>
+                <th class="num" style="width:90px">当前结存</th>
+                <th style="width:80px">状态</th>
+                <th style="width:230px">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="mono" style="color:var(--ink-2)">wsm</span></td>
+                <td class="strong">无线鼠标</td><td class="muted">个</td>
+                <td class="num">¥29.90</td><td><span class="badge">淘宝</span></td>
+                <td class="num strong">3</td>
+                <td><span class="badge ok"><span class="dot"></span>启用</span></td>
+                <td><div class="rowacts"><button class="btn" onclick="openModal('mNew')">编辑</button><a class="btn" href="07-inbound-new.html">入库</a><a class="btn" href="08-outbound-new.html">出库</a><button class="btn" disabled title="已有出入库记录，不可删除">删除</button></div></td>
+              </tr>
+              <tr>
+                <td><span class="mono" style="color:var(--ink-2)">wsm,sb</span></td>
+                <td class="strong">无线鼠标 Pro</td><td class="muted">个</td>
+                <td class="num">¥89.00</td><td><span class="badge">京东</span></td>
+                <td class="num strong">1</td>
+                <td><span class="badge ok"><span class="dot"></span>启用</span></td>
+                <td><div class="rowacts"><button class="btn" onclick="openModal('mNew')">编辑</button><a class="btn" href="07-inbound-new.html">入库</a><a class="btn" href="08-outbound-new.html">出库</a><button class="btn" disabled title="已有出入库记录，不可删除">删除</button></div></td>
+              </tr>
+              <tr>
+                <td><span class="mono" style="color:var(--ink-2)">sjx</span></td>
+                <td class="strong">数据线</td><td class="muted">条</td>
+                <td class="num">¥12.90</td><td><span class="badge">拼多多</span></td>
+                <td class="num strong">12</td>
+                <td><span class="badge ok"><span class="dot"></span>启用</span></td>
+                <td><div class="rowacts"><button class="btn" onclick="openModal('mNew')">编辑</button><a class="btn" href="07-inbound-new.html">入库</a><a class="btn" href="08-outbound-new.html">出库</a><button class="btn" disabled title="已有出入库记录，不可删除">删除</button></div></td>
+              </tr>
+              <tr>
+                <td><span class="mono" style="color:var(--ink-2)">sjp</span></td>
+                <td class="strong">手机支架</td><td class="muted">个</td>
+                <td class="num">¥18.50</td><td><span class="badge">1688</span></td>
+                <td class="num strong">6</td>
+                <td><span class="badge ok"><span class="dot"></span>启用</span></td>
+                <td><div class="rowacts"><button class="btn" onclick="openModal('mNew')">编辑</button><a class="btn" href="07-inbound-new.html">入库</a><a class="btn" href="08-outbound-new.html">出库</a><button class="btn" disabled title="已有出入库记录，不可删除">删除</button></div></td>
+              </tr>
+              <tr>
+                <td><span class="mono" style="color:var(--ink-2)">zm</span></td>
+                <td class="strong">签字笔</td><td class="muted">支</td>
+                <td class="num">¥3.50</td><td><span class="badge">淘宝</span></td>
+                <td class="num strong">26</td>
+                <td><span class="badge ok"><span class="dot"></span>启用</span></td>
+                <td><div class="rowacts"><button class="btn" onclick="openModal('mNew')">编辑</button><a class="btn" href="07-inbound-new.html">入库</a><a class="btn" href="08-outbound-new.html">出库</a><button class="btn" disabled title="已有出入库记录，不可删除">删除</button></div></td>
+              </tr>
+              <tr>
+                <td><span class="mono" style="color:var(--ink-2)">ch</span></td>
+                <td class="strong">插线板</td><td class="muted">个</td>
+                <td class="num">¥45.00</td><td><span class="badge">京东</span></td>
+                <td class="num strong">3</td>
+                <td><span class="badge ok"><span class="dot"></span>启用</span></td>
+                <td><div class="rowacts"><button class="btn" onclick="openModal('mNew')">编辑</button><a class="btn" href="07-inbound-new.html">入库</a><a class="btn" href="08-outbound-new.html">出库</a><button class="btn" disabled title="已有出入库记录，不可删除">删除</button></div></td>
+              </tr>
+              <tr>
+                <td><span class="mono" style="color:var(--ink-2)">ec</span></td>
+                <td class="strong">耳机</td><td class="muted">副</td>
+                <td class="num">¥199.00</td><td><span class="badge">京东</span></td>
+                <td class="num strong">1</td>
+                <td><span class="badge ok"><span class="dot"></span>启用</span></td>
+                <td><div class="rowacts"><button class="btn" onclick="openModal('mNew')">编辑</button><a class="btn" href="07-inbound-new.html">入库</a><a class="btn" href="08-outbound-new.html">出库</a><button class="btn" disabled title="已有出入库记录，不可删除">删除</button></div></td>
+              </tr>
+              <tr>
+                <td><span class="mono" style="color:var(--ink-2)">lb</span></td>
+                <td class="strong">垃圾袋</td><td class="muted">卷</td>
+                <td class="num">¥9.90</td><td><span class="badge">拼多多</span></td>
+                <td class="num strong">15</td>
+                <td><span class="badge ok"><span class="dot"></span>启用</span></td>
+                <td><div class="rowacts"><button class="btn" onclick="openModal('mNew')">编辑</button><a class="btn" href="07-inbound-new.html">入库</a><a class="btn" href="08-outbound-new.html">出库</a><button class="btn" disabled title="已有出入库记录，不可删除">删除</button></div></td>
+              </tr>
+              <tr>
+                <td><span class="mono" style="color:var(--ink-2)">wjx</span></td>
+                <td class="strong">文件夹架</td><td class="muted">个</td>
+                <td class="num">¥35.00</td><td><span class="badge">1688</span></td>
+                <td class="num strong" style="color:var(--ink-3)">0</td>
+                <td><span class="badge warn"><span class="dot"></span>停用</span></td>
+                <td><div class="rowacts"><button class="btn" onclick="openModal('mNew')">编辑</button><a class="btn" href="07-inbound-new.html">入库</a><button class="btn disabled">出库</button><button class="btn" disabled title="已有出入库记录，不可删除">删除</button></div></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="empty" data-filter-empty style="display:none">
+            <div class="ei"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
+            <h4>没有匹配的物资</h4>
+            <p>换个拼音码或品名试试</p>
+          </div>
+        </div>
+
+        <div class="pager">
+          <span>显示 1–9 条，共 128 条</span>
+          <div class="pages">
+            <span class="pg">‹</span><span class="pg active">1</span><span class="pg">2</span>
+            <span class="pg">3</span><span class="pg">…</span><span class="pg">15</span><span class="pg">›</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ============ 新增/编辑物资 弹窗 ============ -->
+<div class="overlay" id="mNew">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>新增物资</h3>
+      <span class="x" data-close="mNew">&times;</span>
+    </div>
+    <div class="modal-body">
+      <form id="itemForm">
+        <div class="field">
+          <label for="i_name">品名<span class="req">*</span></label>
+          <input class="input" id="i_name" placeholder="如：无线鼠标">
+          <div class="hint">同名物资允许存在多条（如不同规格）</div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="i_unit">单位<span class="req">*</span></label>
+            <select class="select" id="i_unit">
+              <option>个</option><option>件</option><option>套</option><option>盒</option>
+              <option>包</option><option>瓶</option><option>袋</option><option>箱</option>
+              <option>卷</option><option>米</option><option>千克</option><option>张</option>
+              <option>台</option><option>支</option><option>副</option><option>提</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="i_price">零售价<span class="req">*</span></label>
+            <input class="input" id="i_price" type="number" min="0" step="0.01" placeholder="0.00">
+            <div class="hint">用于计算入库金额</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="i_plat">购买平台<span class="req">*</span></label>
+          <select class="select" id="i_plat">
+            <option>淘宝</option><option>天猫</option><option>京东</option>
+            <option>拼多多</option><option>1688</option><option>抖音</option>
+            <option>小红书</option><option>线下</option><option>其他</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="i_py">品名拼音码<span class="req">*</span></label>
+          <div style="display:flex;gap:8px">
+            <input class="input mono" id="i_py" placeholder="如 wsm">
+            <button class="btn" type="button" id="regen">重新生成</button>
+          </div>
+          <div class="hint">录入品名后自动生成首字母简拼，可手动修改；多个码用逗号分隔，如 <span class="mono">wsm,sb</span></div>
+        </div>
+
+        <div class="field" style="margin-bottom:0">
+          <label for="i_remark">备注</label>
+          <textarea class="textarea" id="i_remark" placeholder="选填，≤100 字"></textarea>
+        </div>
+      </form>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close="mNew">取消</button>
+      <button class="btn primary" onclick="saveItem()">保存</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-wrap"></div>
+
+<script src="assets/app.js"></script>
+<script>
+  initFilter('#q', '#itemTbl');
+
+  document.getElementById('i_name').addEventListener('input', function () {
+    var v = toPinyin(this.value);
+    if (v) document.getElementById('i_py').value = v;
+  });
+  document.getElementById('regen').addEventListener('click', function () {
+    var v = toPinyin(document.getElementById('i_name').value);
+    if (!v) { toast('请先填写品名', 'err'); return; }
+    document.getElementById('i_py').value = v;
+  });
+
+  function saveItem() {
+    var n = document.getElementById('i_name').value.trim();
+    var p = document.getElementById('i_price').value;
+    var py = document.getElementById('i_py').value.trim();
+    if (!n) { toast('请填写品名', 'err'); return; }
+    if (p === '' || Number(p) < 0) { toast('请填写正确的零售价', 'err'); return; }
+    if (!/^[a-z0-9][a-z0-9, ]*$/.test(py)) { toast('拼音码只能包含小写字母、数字，多个码用逗号分隔', 'err'); return; }
+    closeModal('mNew');
+    toast('物资已保存：' + n);
+  }
+</script>
+</body>
+</html>

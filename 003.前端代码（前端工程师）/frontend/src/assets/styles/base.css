@@ -1,0 +1,565 @@
+/**
+ * 基础样式与通用组件类
+ * ---------------------------------------------------------------
+ * 只放"不依赖 Vue 上下文"的样式；组件专属样式一律写在 .vue 的 <style scoped> 里。
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-1);
+  background: var(--plane);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+::selection {
+  background: var(--accent-wash);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+.muted {
+  color: var(--ink-3);
+}
+.strong {
+  font-weight: 600;
+}
+.text-right {
+  text-align: right;
+}
+.nowrap {
+  white-space: nowrap;
+}
+
+/* ---------------- 布局 ---------------- */
+.page {
+  padding: 22px;
+  max-width: 1360px;
+  width: 100%;
+}
+
+.page-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+.page-head h1 {
+  font-size: 20px;
+}
+.page-head .sub {
+  color: var(--ink-3);
+  font-size: 13px;
+  margin-top: 3px;
+}
+.page-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* ---------------- 卡片 ---------------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-1);
+}
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+}
+.card-head h3 {
+  font-size: 14.5px;
+}
+.card-head .sub {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+.card-head .right {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.card-body {
+  padding: 18px;
+}
+.card-body.tight {
+  padding: 0;
+}
+
+/* ---------------- 按钮 ---------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--line-strong);
+  background: var(--surface-2);
+  color: var(--ink-1);
+  font-family: var(--font);
+  font-size: 13.5px;
+  font-weight: 550;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.12s ease, border-color 0.12s ease, transform 0.06s ease;
+}
+.btn:hover {
+  background: var(--wash);
+  text-decoration: none;
+}
+.btn:active {
+  transform: translateY(0.5px);
+}
+.btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(42, 120, 214, 0.28);
+}
+.btn.primary:hover {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+}
+.btn.ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--ink-2);
+}
+.btn.ghost:hover {
+  background: var(--wash);
+}
+.btn.danger {
+  color: var(--critical);
+}
+.btn.danger:hover {
+  background: rgba(208, 59, 59, 0.08);
+}
+.btn.lg {
+  height: 42px;
+  padding: 0 18px;
+  font-size: 14.5px;
+  border-radius: var(--r);
+}
+.btn.sm {
+  height: 28px;
+  padding: 0 10px;
+  font-size: 12.5px;
+}
+.btn.block {
+  width: 100%;
+}
+.btn:disabled,
+.btn.disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+.btn .k {
+  font-size: 11px;
+  opacity: 0.7;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  padding: 0 4px;
+}
+
+/* ---------------- 表单 ---------------- */
+.field {
+  margin-bottom: 16px;
+}
+.field > label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-2);
+  margin-bottom: 6px;
+}
+.field > label .req {
+  color: var(--critical);
+  margin-left: 2px;
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  height: 38px;
+  padding: 0 11px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--surface-2);
+  color: var(--ink-1);
+  font-family: var(--font);
+  font-size: 13.5px;
+  transition: border-color 0.12s ease, box-shadow 0.12s ease;
+}
+.textarea {
+  height: auto;
+  padding: 9px 11px;
+  resize: vertical;
+  min-height: 72px;
+  line-height: 1.5;
+}
+.input::placeholder,
+.textarea::placeholder {
+  color: #a9a79f;
+}
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-wash);
+}
+.input:disabled,
+.input[readonly] {
+  background: var(--wash);
+  color: var(--ink-2);
+  cursor: default;
+}
+.input.error {
+  border-color: var(--critical);
+}
+.input.error:focus {
+  box-shadow: 0 0 0 3px rgba(208, 59, 59, 0.12);
+}
+.select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23898781' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 9px center;
+  padding-right: 30px;
+  cursor: pointer;
+}
+
+.hint {
+  font-size: 12px;
+  color: var(--ink-3);
+  margin-top: 5px;
+}
+.err {
+  font-size: 12px;
+  color: var(--critical);
+  margin-top: 5px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 14px;
+}
+
+/* ---------------- 表格 ---------------- */
+.table-wrap {
+  overflow-x: auto;
+}
+table.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+.tbl th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--ink-3);
+  letter-spacing: 0.02em;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  white-space: nowrap;
+}
+.tbl td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+.tbl tbody tr:last-child td {
+  border-bottom: 0;
+}
+.tbl tbody tr:hover {
+  background: var(--wash);
+}
+.tbl td.num,
+.tbl th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.rowacts {
+  display: flex;
+  gap: 4px;
+}
+.rowacts .btn {
+  height: 26px;
+  padding: 0 9px;
+  font-size: 12.5px;
+}
+
+/* ---------------- 徽标 ---------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 21px;
+  padding: 0 8px;
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1;
+  background: var(--wash);
+  color: var(--ink-2);
+  border: 1px solid var(--ring);
+  white-space: nowrap;
+}
+.badge.ok {
+  background: rgba(12, 163, 12, 0.1);
+  color: var(--good-text);
+  border-color: rgba(12, 163, 12, 0.22);
+}
+.badge.warn {
+  background: rgba(250, 178, 25, 0.16);
+  color: var(--warning-text);
+  border-color: rgba(250, 178, 25, 0.35);
+}
+.badge.crit {
+  background: rgba(208, 59, 59, 0.1);
+  color: var(--critical);
+  border-color: rgba(208, 59, 59, 0.24);
+}
+.badge.info {
+  background: var(--accent-wash);
+  color: var(--accent-strong);
+  border-color: var(--accent-line);
+}
+.badge .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 20px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface-2);
+  font-size: 12.5px;
+  color: var(--ink-2);
+  cursor: pointer;
+  user-select: none;
+}
+.chip.on {
+  background: var(--accent-wash);
+  border-color: var(--accent-line);
+  color: var(--accent-strong);
+  font-weight: 600;
+}
+
+/* ---------------- 提示条 ---------------- */
+.banner {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  border-radius: var(--r);
+  font-size: 13px;
+  line-height: 1.55;
+  background: var(--accent-wash);
+  color: var(--accent-strong);
+  border: 1px solid var(--accent-line);
+}
+.banner.warn {
+  background: rgba(250, 178, 25, 0.12);
+  color: var(--warning-text);
+  border-color: rgba(250, 178, 25, 0.35);
+}
+.banner.crit {
+  background: rgba(208, 59, 59, 0.08);
+  color: var(--critical);
+  border-color: rgba(208, 59, 59, 0.22);
+}
+.banner.neutral {
+  background: var(--wash);
+  color: var(--ink-2);
+  border-color: var(--line);
+}
+
+/* ---------------- 空状态 ---------------- */
+.empty {
+  padding: 54px 20px;
+  text-align: center;
+}
+.empty .ei {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 12px;
+  border-radius: 15px;
+  background: var(--wash);
+  display: grid;
+  place-items: center;
+  color: var(--ink-3);
+}
+.empty h4 {
+  font-size: 14.5px;
+  margin-bottom: 4px;
+}
+.empty p {
+  color: var(--ink-3);
+  font-size: 13px;
+  margin: 0 0 14px;
+}
+
+/* ---------------- 认证页辅助类 ---------------- */
+/* 注意：这些类被 auth 视图通过插槽传入 AuthLayout，
+   scoped 样式够不到插槽内容，必须放在全局层 */
+.auth-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: -4px 0 16px;
+  font-size: 13px;
+}
+.auth-alt {
+  margin-top: 18px;
+  font-size: 13px;
+  color: var(--ink-3);
+  text-align: center;
+}
+.auth-alt a {
+  font-weight: 600;
+}
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--ink-3);
+  font-size: 12px;
+  margin: 18px 0;
+}
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  height: 1px;
+  background: var(--line);
+  flex: 1;
+}
+.auth-steps {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 22px;
+}
+.auth-step {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  color: var(--ink-3);
+}
+.auth-step .n {
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--wash);
+  color: var(--ink-3);
+  font-size: 11.5px;
+  font-weight: 650;
+}
+.auth-step.on {
+  color: var(--ink-1);
+  font-weight: 600;
+}
+.auth-step.on .n {
+  background: var(--accent);
+  color: #fff;
+}
+.auth-step .bar {
+  width: 26px;
+  height: 1px;
+  background: var(--line);
+}
+
+/* ---------------- 工具条 ---------------- */
+.toolbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--line);
+}
+.toolbar .input,
+.toolbar .select {
+  height: 34px;
+  width: auto;
+  min-width: 150px;
+}
+.toolbar .right {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* ---------------- 响应式 ---------------- */
+@media (max-width: 900px) {
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 720px) {
+  .page {
+    padding: 14px;
+  }
+}

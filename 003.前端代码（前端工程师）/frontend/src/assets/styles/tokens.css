@@ -1,0 +1,102 @@
+/**
+ * 设计令牌 (Design Tokens)
+ * ---------------------------------------------------------------
+ * 与 UI 原型 `002.产品UI原型（美术设计）/assets/theme.css` 完全一致，
+ * 改这里 = 改全站视觉。配色经 validate_palette.js 六项检查通过（明暗双模式全 PASS）。
+ */
+
+:root {
+  color-scheme: light;
+
+  /* 表面与墨色 */
+  --surface: #fcfcfb;
+  --surface-2: #ffffff;
+  --plane: #f4f4f1;
+  --sidebar: #ffffff;
+
+  --ink-1: #0b0b0b;
+  --ink-2: #52514e;
+  --ink-3: #898781;
+
+  --line: #e1e0d9;
+  --line-strong: #c3c2b7;
+  --ring: rgba(11, 11, 11, 0.1);
+  --wash: rgba(11, 11, 11, 0.04);
+
+  /* 强调色 */
+  --accent: #2a78d6;
+  --accent-strong: #184f95;
+  --accent-wash: #eaf2fd;
+  --accent-line: #b7d3f6;
+
+  /* 状态色（固定，不参与分类轮换，须与文字标签同现） */
+  --good: #0ca30c;
+  --good-text: #006300;
+  --warning: #fab219;
+  --warning-text: #7a5200;
+  --serious: #ec835a;
+  --critical: #d03b3b;
+
+  /* 图表与数据色 */
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --grid: #e1e0d9;
+  --spark: #c3c2b7;
+
+  /* 图标色块底色（白字对比度均 ≥ 3:1） */
+  --tile-1: #1c5cab;
+  --tile-2: #d95926;
+  --tile-3: #10875c;
+
+  /* 尺寸 */
+  --r-xs: 5px;
+  --r-sm: 7px;
+  --r: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+
+  --shadow-1: 0 1px 2px rgba(11, 11, 11, 0.05);
+  --shadow-2: 0 1px 2px rgba(11, 11, 11, 0.05), 0 10px 28px rgba(11, 11, 11, 0.07);
+  --shadow-3: 0 24px 64px rgba(11, 11, 11, 0.18);
+
+  --font: system-ui, -apple-system, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC',
+    'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+  --sidebar-w: 216px;
+  --topbar-h: 56px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme='light'])) {
+    color-scheme: dark;
+    --surface: #1a1a19;
+    --surface-2: #212120;
+    --plane: #0d0d0d;
+    --sidebar: #151514;
+    --ink-1: #f0efec;
+    --ink-2: #c3c2b7;
+    --ink-3: #898781;
+    --line: #2c2c2a;
+    --line-strong: #383835;
+    --ring: rgba(255, 255, 255, 0.1);
+    --wash: rgba(255, 255, 255, 0.05);
+    --accent: #3987e5;
+    --accent-strong: #86b6ef;
+    --accent-wash: rgba(57, 135, 229, 0.16);
+    --accent-line: #1c5cab;
+    --good-text: #0ca30c;
+    --warning-text: #fab219;
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --tile-1: #2a78d6;
+    --tile-2: #d95926;
+    --tile-3: #199e70;
+    --grid: #2c2c2a;
+    --spark: #52514e;
+    --shadow-2: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 28px rgba(0, 0, 0, 0.45);
+    --shadow-3: 0 24px 64px rgba(0, 0, 0, 0.6);
+  }
+}

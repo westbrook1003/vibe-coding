@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>出库对象 · 物资系统</title>
+<link rel="stylesheet" href="assets/theme.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">资</div>
+      <div>
+        <div class="brand-name">物资系统</div>
+        <div class="brand-sub">出入库管理</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <div class="nav-group-label">快捷操作</div>
+      <a class="nav-item" href="07-inbound-new.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>物资入库 <span class="tag">I</span></a>
+      <a class="nav-item" href="08-outbound-new.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></svg>物资出库 <span class="tag">O</span></a>
+      <div class="nav-group-label">查询</div>
+      <a class="nav-item" href="05-home-stock.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>库存总览</a>
+      <a class="nav-item" href="09-inbound-list.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>入库记录</a>
+      <a class="nav-item" href="10-outbound-list.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>出库记录</a>
+      <div class="nav-group-label">基础数据</div>
+      <a class="nav-item" href="06-items.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>物资档案</a>
+      <a class="nav-item" href="11-receivers.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>出库对象</a>
+      <a class="nav-item" href="12-users.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>人员信息 <span class="tag gray">仅管理员</span></a>
+    </nav>
+    <div class="side-foot">v1.0 · UI 原型</div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="crumb">物资系统 / <b>出库对象</b></div>
+      <div class="top-search">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input class="input" placeholder="搜索物资 / 订单号">
+      </div>
+      <div class="usermenu">
+        <div class="avatar">张</div>
+        <div><div class="who">张三</div><div class="role">管理员</div></div>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="page-head">
+        <div>
+          <h1>出库对象</h1>
+          <div class="sub">物资发给了谁 —— 独立于系统账号的自由名称，可由任意登录用户维护</div>
+        </div>
+        <div class="page-actions">
+          <button class="btn primary" onclick="openModal('mRecv')">＋ 新增出库对象</button>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:18px">
+        <div class="card-body" style="display:flex;gap:12px;align-items:flex-start">
+          <span style="flex:0 0 auto;width:34px;height:34px;border-radius:10px;background:var(--accent-wash);color:var(--accent-strong);display:grid;place-items:center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>
+          </span>
+          <div style="font-size:13px;color:var(--ink-2);line-height:1.75">
+            出库对象是<b>你自己定义</b>的名字，可以是人名、部门、项目或班组，不要求对应系统账号。
+            在出库页直接输入新名字提交后，会<b>自动加入本列表</b>，下次可直接选择。
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <input class="input search" id="q" placeholder="名称 / 备注">
+          <select class="select"><option>全部状态</option><option>启用</option><option>停用</option></select>
+        </div>
+
+        <div class="table-wrap">
+          <table class="tbl" id="tbl">
+            <thead>
+              <tr>
+                <th style="width:200px">名称</th>
+                <th>备注</th>
+                <th class="num" style="width:110px">出库次数</th>
+                <th style="width:150px">最近出库</th>
+                <th style="width:90px">状态</th>
+                <th style="width:160px">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="strong">张三</td><td class="muted">技术部</td><td class="num">12</td><td class="muted">2026-10-26 12:34</td><td><span class="badge ok"><span class="dot"></span>启用</span></td><td><div class="rowacts"><button class="btn" onclick="openModal('mRecv')">编辑</button><button class="btn" disabled title="已有出库记录，不可删除">删除</button></div></td></tr>
+              <tr><td class="strong">李四</td><td class="muted">行政部</td><td class="num">8</td><td class="muted">2026-10-26 09:20</td><td><span class="badge ok"><span class="dot"></span>启用</span></td><td><div class="rowacts"><button class="btn" onclick="openModal('mRecv')">编辑</button><button class="btn" disabled title="已有出库记录，不可删除">删除</button></div></td></tr>
+              <tr><td class="strong">王五</td><td class="muted">项目A施工组</td><td class="num">5</td><td class="muted">2026-10-24 15:50</td><td><span class="badge ok"><span class="dot"></span>启用</span></td><td><div class="rowacts"><button class="btn" onclick="openModal('mRecv')">编辑</button><button class="btn" disabled title="已有出库记录，不可删除">删除</button></div></td></tr>
+              <tr><td class="strong">项目A施工组</td><td class="muted">—</td><td class="num">3</td><td class="muted">2026-10-25 11:30</td><td><span class="badge ok"><span class="dot"></span>启用</span></td><td><div class="rowacts"><button class="btn" onclick="openModal('mRecv')">编辑</button><button class="btn" disabled title="已有出库记录，不可删除">删除</button></div></td></tr>
+              <tr><td class="strong">办公室</td><td class="muted">公共领用</td><td class="num">7</td><td class="muted">2026-10-26 09:20</td><td><span class="badge ok"><span class="dot"></span>启用</span></td><td><div class="rowacts"><button class="btn" onclick="openModal('mRecv')">编辑</button><button class="btn" disabled title="已有出库记录，不可删除">删除</button></div></td></tr>
+              <tr><td class="strong">赵六</td><td class="muted">临时来访</td><td class="num">0</td><td class="muted">—</td><td><span class="badge ok"><span class="dot"></span>启用</span></td><td><div class="rowacts"><button class="btn" onclick="openModal('mRecv')">编辑</button><button class="btn" onclick="toast('已删除出库对象：赵六')">删除</button></div></td></tr>
+              <tr><td class="strong">旧项目组</td><td class="muted">已结束</td><td class="num">2</td><td class="muted">2026-08-11 10:00</td><td><span class="badge warn"><span class="dot"></span>停用</span></td><td><div class="rowacts"><button class="btn" onclick="openModal('mRecv')">编辑</button><button class="btn" disabled title="已有出库记录，不可删除">删除</button></div></td></tr>
+            </tbody>
+          </table>
+          <div class="empty" data-filter-empty style="display:none">
+            <div class="ei"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
+            <h4>没有匹配的出库对象</h4><p>换个关键词试试</p>
+          </div>
+        </div>
+
+        <div class="pager">
+          <span>共 7 条</span>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ============ 新增/编辑出库对象 ============ -->
+<div class="overlay" id="mRecv">
+  <div class="modal" style="width:440px">
+    <div class="modal-head"><h3>新增出库对象</h3><span class="x" data-close="mRecv">&times;</span></div>
+    <div class="modal-body">
+      <div class="field">
+        <label for="r_name">名称<span class="req">*</span></label>
+        <input class="input" id="r_name" placeholder="如：项目A施工组 / 张三">
+        <div class="hint">1~20 字符，不限于系统登录用户</div>
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label for="r_note">备注</label>
+        <input class="input" id="r_note" placeholder="选填，如：所属部门 / 项目 / 班组">
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close="mRecv">取消</button>
+      <button class="btn primary" onclick="saveRecv()">保存</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-wrap"></div>
+
+<script src="assets/app.js"></script>
+<script>
+  initFilter('#q', '#tbl');
+  function saveRecv() {
+    var n = document.getElementById('r_name').value.trim();
+    if (!n) { toast('请填写名称', 'err'); return; }
+    closeModal('mRecv');
+    toast('已保存出库对象：' + n);
+  }
+</script>
+</body>
+</html>

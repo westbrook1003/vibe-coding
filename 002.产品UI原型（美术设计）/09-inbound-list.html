@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>入库记录 · 物资系统</title>
+<link rel="stylesheet" href="assets/theme.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">资</div>
+      <div>
+        <div class="brand-name">物资系统</div>
+        <div class="brand-sub">出入库管理</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <div class="nav-group-label">快捷操作</div>
+      <a class="nav-item" href="07-inbound-new.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>物资入库 <span class="tag">I</span></a>
+      <a class="nav-item" href="08-outbound-new.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></svg>物资出库 <span class="tag">O</span></a>
+      <div class="nav-group-label">查询</div>
+      <a class="nav-item" href="05-home-stock.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>库存总览</a>
+      <a class="nav-item" href="09-inbound-list.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>入库记录</a>
+      <a class="nav-item" href="10-outbound-list.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>出库记录</a>
+      <div class="nav-group-label">基础数据</div>
+      <a class="nav-item" href="06-items.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>物资档案</a>
+      <a class="nav-item" href="11-receivers.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>出库对象</a>
+      <a class="nav-item" href="12-users.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>人员信息 <span class="tag gray">仅管理员</span></a>
+    </nav>
+    <div class="side-foot">v1.0 · UI 原型</div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="crumb">物资系统 / <b>入库记录</b></div>
+      <div class="top-search">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input class="input" placeholder="搜索物资 / 订单号">
+      </div>
+      <div class="usermenu">
+        <div class="avatar">张</div>
+        <div><div class="who">张三</div><div class="role">管理员</div></div>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="page-head">
+        <div>
+          <h1>入库记录</h1>
+          <div class="sub">全部历史入库流水，按时间倒序；记录不可编辑、不可删除</div>
+        </div>
+        <div class="page-actions">
+          <button class="btn">导出</button>
+          <a class="btn primary" href="07-inbound-new.html">＋ 新增入库</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <input class="input search" id="q" placeholder="拼音码 / 品名 / 订单编号">
+          <select class="select"><option>全部操作人</option><option>张三</option><option>李四</option><option>王五</option></select>
+          <input class="input" type="date" style="width:150px" value="2026-10-26">
+          <span style="color:var(--ink-3)">至</span>
+          <input class="input" type="date" style="width:150px" value="2026-10-26">
+          <div class="right"><span class="badge warn">记录一经写入不可修改</span></div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="tbl" id="tbl">
+            <thead>
+              <tr>
+                <th style="width:150px">入库时间</th>
+                <th style="width:96px">拼音码</th>
+                <th>品名</th>
+                <th class="num" style="width:80px">数量</th>
+                <th class="num" style="width:96px">单价</th>
+                <th class="num" style="width:110px">金额</th>
+                <th style="width:180px">订单编号</th>
+                <th style="width:100px">平台</th>
+                <th style="width:90px">操作人</th>
+                <th>备注</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="muted">2026-10-26 12:30</td><td><span class="mono" style="color:var(--ink-2)">wsm</span></td><td class="strong">无线鼠标</td><td class="num strong">2</td><td class="num">¥29.90</td><td class="num strong">¥59.80</td><td><span class="mono">20261026T12345</span></td><td><span class="badge">淘宝</span></td><td>张三</td><td class="muted">—</td></tr>
+              <tr><td class="muted">2026-10-26 10:02</td><td><span class="mono" style="color:var(--ink-2)">sjx</span></td><td class="strong">数据线</td><td class="num strong">5</td><td class="num">¥12.90</td><td class="num strong">¥64.50</td><td><span class="mono">PDD2026102609981</span></td><td><span class="badge">拼多多</span></td><td>李四</td><td class="muted">—</td></tr>
+              <tr><td class="muted">2026-10-26 09:15</td><td><span class="mono" style="color:var(--ink-2)">cs</span></td><td class="strong">抽纸</td><td class="num strong">4</td><td class="num">¥32.00</td><td class="num strong">¥128.00</td><td><span class="mono">TM20261025-77321</span></td><td><span class="badge">天猫</span></td><td>张三</td><td class="muted">满减</td></tr>
+              <tr><td class="muted">2026-10-25 17:40</td><td><span class="mono" style="color:var(--ink-2)">zm</span></td><td class="strong">签字笔</td><td class="num strong">20</td><td class="num">¥3.50</td><td class="num strong">¥70.00</td><td><span class="mono">TB20251025-44120</span></td><td><span class="badge">淘宝</span></td><td>王五</td><td class="muted">—</td></tr>
+              <tr><td class="muted">2026-10-25 11:20</td><td><span class="mono" style="color:var(--ink-2)">lb</span></td><td class="strong">垃圾袋</td><td class="num strong">10</td><td class="num">¥9.90</td><td class="num strong">¥99.00</td><td><span class="mono">PDD20251025-66203</span></td><td><span class="badge">拼多多</span></td><td>李四</td><td class="muted">—</td></tr>
+              <tr><td class="muted">2026-10-24 15:48</td><td><span class="mono" style="color:var(--ink-2)">ch</span></td><td class="strong">插线板</td><td class="num strong">2</td><td class="num">¥45.00</td><td class="num strong">¥90.00</td><td><span class="mono">JD20251024-11883</span></td><td><span class="badge">京东</span></td><td>张三</td><td class="muted">含运费 8 元</td></tr>
+              <tr><td class="muted">2026-10-24 09:05</td><td><span class="mono" style="color:var(--ink-2)">sjp</span></td><td class="strong">手机支架</td><td class="num strong">6</td><td class="num">¥18.50</td><td class="num strong">¥111.00</td><td><span class="mono">1688-20251024-3351</span></td><td><span class="badge">1688</span></td><td>王五</td><td class="muted">—</td></tr>
+              <tr><td class="muted">2026-10-23 16:05</td><td><span class="mono" style="color:var(--ink-2)">yj</span></td><td class="strong">文件夹</td><td class="num strong">20</td><td class="num">¥4.50</td><td class="num strong">¥90.00</td><td><span class="mono">TB20251023-90112</span></td><td><span class="badge">淘宝</span></td><td>李四</td><td class="muted">—</td></tr>
+              <tr><td class="muted">2026-10-22 14:33</td><td><span class="mono" style="color:var(--ink-2)">a4z</span></td><td class="strong">A4 纸</td><td class="num strong">10</td><td class="num">¥23.00</td><td class="num strong">¥230.00</td><td><span class="mono">JD20251022-22014</span></td><td><span class="badge">京东</span></td><td>张三</td><td class="muted">—</td></tr>
+              <tr><td class="muted">2026-10-20 10:10</td><td><span class="mono" style="color:var(--ink-2)">wjx</span></td><td class="strong">文件夹架</td><td class="num strong">3</td><td class="num">¥35.00</td><td class="num strong">¥105.00</td><td><span class="mono">1688-20251020-1120</span></td><td><span class="badge">1688</span></td><td>王五</td><td class="muted">—</td></tr>
+            </tbody>
+          </table>
+          <div class="empty" data-filter-empty style="display:none">
+            <div class="ei"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
+            <h4>没有匹配的入库记录</h4><p>换个关键词或时间区间试试</p>
+          </div>
+        </div>
+
+        <div class="pager">
+          <span>显示 1–10 条，共 268 条 · 合计入库金额 ¥948.80</span>
+          <div class="pages">
+            <span class="pg">‹</span><span class="pg active">1</span><span class="pg">2</span>
+            <span class="pg">3</span><span class="pg">…</span><span class="pg">27</span><span class="pg">›</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<div class="toast-wrap"></div>
+
+<script src="assets/app.js"></script>
+<script>initFilter('#q', '#tbl');</script>
+</body>
+</html>

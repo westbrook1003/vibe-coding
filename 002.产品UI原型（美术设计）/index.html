@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>物资系统 · UI 原型总览</title>
+<link rel="stylesheet" href="assets/theme.css">
+<style>
+  body { background: var(--plane); }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 34px 26px 60px; }
+  .hero { display: flex; align-items: flex-end; gap: 18px; margin-bottom: 26px; flex-wrap: wrap; }
+  .hero h1 { font-size: 27px; letter-spacing: -.02em; }
+  .hero .lead { color: var(--ink-3); font-size: 14px; margin-top: 6px; max-width: 62ch; line-height: 1.7; }
+  .hero .meta { margin-left: auto; display: flex; gap: 8px; }
+
+  .sec-head { display: flex; align-items: baseline; gap: 10px; margin: 34px 0 14px; }
+  .sec-head h2 { font-size: 16px; }
+  .sec-head .sub { font-size: 12.5px; color: var(--ink-3); }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+  .shot {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-1);
+    display: flex; flex-direction: column;
+    transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease;
+  }
+  .shot:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); border-color: var(--accent-line); }
+  .shot .frame {
+    position: relative; height: 210px; overflow: hidden;
+    background: var(--plane); border-bottom: 1px solid var(--line);
+  }
+  .shot .frame iframe {
+    width: 1280px; height: 760px; border: 0;
+    transform: scale(.25); transform-origin: 0 0;
+    pointer-events: none;
+  }
+  .shot .frame .bar {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    background: var(--plane); color: var(--ink-3); font-size: 12px; z-index: 2;
+  }
+  .shot .cap { padding: 13px 15px 15px; display: flex; gap: 10px; align-items: flex-start; }
+  .shot .cap .no {
+    width: 22px; height: 22px; border-radius: 6px; flex: 0 0 22px;
+    background: var(--accent-wash); color: var(--accent-strong);
+    display: grid; place-items: center; font-size: 11.5px; font-weight: 700;
+  }
+  .shot .cap .t { font-size: 14px; font-weight: 620; display: block; }
+  .shot .cap .d { font-size: 12.5px; color: var(--ink-3); margin-top: 2px; line-height: 1.55; display: block; }
+  .shot .cap a { margin-left: auto; align-self: center; font-size: 12.5px; white-space: nowrap; }
+
+  .tok-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+  .tok { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 12px; }
+  .tok .sw { height: 42px; border-radius: var(--r-sm); margin-bottom: 9px; border: 1px solid var(--ring); }
+  .tok .nm { font-size: 12.5px; font-weight: 600; }
+  .tok .hx { font-size: 11.5px; color: var(--ink-3); font-family: ui-monospace, Menlo, Consolas, monospace; }
+
+  .spec-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+  .spec { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 16px 18px; }
+  .spec h4 { font-size: 13.5px; margin-bottom: 12px; }
+  .spec .demo { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+  .spec p { font-size: 12.5px; color: var(--ink-3); line-height: 1.75; margin: 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div>
+      <h1>物资系统 · UI 原型</h1>
+      <p class="lead">
+        依据《物资系统-产品需求文档 PRD v1.0》产出的高保真界面原型，共 <b>12</b> 个页面。
+        所有页面为静态 HTML + 原生 JS，<b>无需构建、无需服务器</b>，双击即可在浏览器打开交互体验。
+      </p>
+    </div>
+    <div class="meta">
+      <span class="badge info">Web 后台</span>
+      <span class="badge">中文界面</span>
+      <span class="badge">支持深色模式</span>
+      <span class="badge ok">响应式 · ≥375px</span>
+    </div>
+  </div>
+
+  <!-- ============ 页面清单 ============ -->
+  <div class="sec-head">
+    <h2>页面清单</h2>
+    <span class="sub">缩略图为页面实时渲染，点击「打开原型」查看完整交互</span>
+  </div>
+
+  <div class="grid">
+
+    <div class="shot">
+      <div class="frame"><iframe src="01-login.html" loading="lazy" scrolling="no"></iframe></div>
+      <div class="cap"><span class="no">01</span>
+        <span><span class="t">登录</span><span class="d">用户名密码登录 · 5 次失败锁定 15 分钟 · 记住我</span></span>
+        <a href="01-login.html">打开原型 →</a>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="frame"><iframe src="02-register.html" loading="lazy" scrolling="no"></iframe></div>
+      <div class="cap"><span class="no">02</span>
+        <span><span class="t">注册</span><span class="d">用户名唯一 · 默认普通用户 · 邮箱可选（用于找回密码）</span></span>
+        <a href="02-register.html">打开原型 →</a>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="frame"><iframe src="03-forgot-password.html" loading="lazy" scrolling="no"></iframe></div>
+      <div class="cap"><span class="no">03</span>
+        <span><span class="t">找回密码</span><span class="d">邮箱验证码 / 未绑定邮箱转管理员 / admin 运维兜底</span></span>
+        <a href="03-forgot-password.html">打开原型 →</a>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="frame"><iframe src="04-change-password.html" loading="lazy" scrolling="no"></iframe></div>
+      <div class="cap"><span class="no">04</span>
+        <span><span class="t">修改密码</span><span class="d">首次用 admin/admin 登录后强制进入此页</span></span>
+        <a href="04-change-password.html">打开原型 →</a>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="frame"><iframe src="05-home-stock.html" loading="lazy" scrolling="no"></iframe></div>
+      <div class="cap"><span class="no">05</span>
+        <span><span class="t">库存总览</span><span class="d">KPI 指标行 · 快捷入口 · 库存清单与筛选</span></span>
+        <a href="05-home-stock.html">打开原型 →</a>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="frame"><iframe src="06-items.html" loading="lazy" scrolling="no"></iframe></div>
+      <div class="cap"><span class="no">06</span>
+        <span><span class="t">物资档案</span><span class="d">品名 / 单位 / 零售价 / 平台 / 拼音码 · 新增编辑弹窗</span></span>
+        <a href="06-items.html">打开原型 →</a>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="frame"><iframe src="07-inbound-new.html" loading="lazy" scrolling="no"></iframe></div>
+      <div class="cap"><span class="no">07</span>
+        <span><span class="t">物资入库 ★</span><span class="d">拼音码联想 → 数量 + 订单编号 · 提交后连续录入</span></span>
+        <a href="07-inbound-new.html">打开原型 →</a>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="frame"><iframe src="08-outbound-new.html" loading="lazy" scrolling="no"></iframe></div>
+      <div class="cap"><span class="no">08</span>
+        <span><span class="t">物资出库 ★</span><span class="d">仅显示有结存物资 · 出库到个人 · 超库存实时拦截</span></span>
+        <a href="08-outbound-new.html">打开原型 →</a>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="frame"><iframe src="09-inbound-list.html" loading="lazy" scrolling="no"></iframe></div>
+      <div class="cap"><span class="no">09</span>
+        <span><span class="t">入库记录</span><span class="d">只读流水 · 按订单编号检索 · 不可编辑不可删除</span></span>
+        <a href="09-inbound-list.html">打开原型 →</a>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="frame"><iframe src="10-outbound-list.html" loading="lazy" scrolling="no"></iframe></div>
+      <div class="cap"><span class="no">10</span>
+        <span><span class="t">出库记录</span><span class="d">物资去向逐笔可查 · 按出库对象筛选</span></span>
+        <a href="10-outbound-list.html">打开原型 →</a>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="frame"><iframe src="11-receivers.html" loading="lazy" scrolling="no"></iframe></div>
+      <div class="cap"><span class="no">11</span>
+        <span><span class="t">出库对象</span><span class="d">自由定义名称 · 独立于系统账号 · 被引用后不可删</span></span>
+        <a href="11-receivers.html">打开原型 →</a>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="frame"><iframe src="12-users.html" loading="lazy" scrolling="no"></iframe></div>
+      <div class="cap"><span class="no">12</span>
+        <span><span class="t">人员信息</span><span class="d">仅管理员可见 · 角色分配 · 重置密码 · 停用保护</span></span>
+        <a href="12-users.html">打开原型 →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ 设计规范 ============ -->
+  <div class="sec-head"><h2>设计规范</h2><span class="sub">Design Tokens · 颜色 / 字号 / 圆角 / 组件状态</span></div>
+
+  <div class="tok-grid">
+    <div class="tok"><div class="sw" style="background:#2a78d6"></div><div class="nm">强调 / 主色</div><div class="hx">#2a78d6 · series-1</div></div>
+    <div class="tok"><div class="sw" style="background:#fcfcfb"></div><div class="nm">卡片表面</div><div class="hx">#fcfcfb · surface</div></div>
+    <div class="tok"><div class="sw" style="background:#f4f4f1"></div><div class="nm">页面底板</div><div class="hx">#f4f4f1 · plane</div></div>
+    <div class="tok"><div class="sw" style="background:#0b0b0b"></div><div class="nm">主文本</div><div class="hx">#0b0b0b · ink-1</div></div>
+    <div class="tok"><div class="sw" style="background:#52514e"></div><div class="nm">次文本</div><div class="hx">#52514e · ink-2</div></div>
+    <div class="tok"><div class="sw" style="background:#898781"></div><div class="nm">弱化文本</div><div class="hx">#898781 · ink-3</div></div>
+    <div class="tok"><div class="sw" style="background:#e1e0d9"></div><div class="nm">发丝分隔线</div><div class="hx">#e1e0d9 · line</div></div>
+    <div class="tok"><div class="sw" style="background:#0ca30c"></div><div class="nm">状态 · 正常</div><div class="hx">#0ca30c · good</div></div>
+    <div class="tok"><div class="sw" style="background:#fab219"></div><div class="nm">状态 · 警告</div><div class="hx">#fab219 · warning</div></div>
+    <div class="tok"><div class="sw" style="background:#d03b3b"></div><div class="nm">状态 · 错误</div><div class="hx">#d03b3b · critical</div></div>
+  </div>
+
+  <div class="sec-head"><h2>组件状态</h2><span class="sub">按钮 / 徽标 / 输入框 / 提示条</span></div>
+  <div class="spec-row">
+    <div class="spec">
+      <h4>按钮</h4>
+      <div class="demo">
+        <button class="btn primary">主要按钮</button>
+        <button class="btn">次要按钮</button>
+        <button class="btn ghost">幽灵按钮</button>
+        <button class="btn danger">危险按钮</button>
+        <button class="btn disabled">禁用</button>
+      </div>
+      <p>高度 34px（小号 28px，大号 42px），圆角 7px；主按钮用于页面唯一主动作，禁用态透明度 45%。</p>
+    </div>
+
+    <div class="spec">
+      <h4>徽标 / 状态</h4>
+      <div class="demo">
+        <span class="badge info">管理员</span>
+        <span class="badge ok"><span class="dot"></span>启用</span>
+        <span class="badge warn"><span class="dot"></span>停用</span>
+        <span class="badge crit">超库存</span>
+        <span class="badge">普通</span>
+      </div>
+      <p>状态色固定不参与分类轮换，且<b>始终与文字标签同时出现</b>，不以颜色单独承载语义。</p>
+    </div>
+
+    <div class="spec">
+      <h4>输入框</h4>
+      <div class="demo" style="width:100%;flex-direction:column;align-items:stretch">
+        <input class="input" placeholder="正常状态">
+        <input class="input error" placeholder="错误状态">
+        <input class="input" value="只读状态" readonly>
+      </div>
+      <p>高度 38px，失焦即校验；错误态红色描边 + 3px 柔光焦点环，必填项红色星号。</p>
+    </div>
+
+    <div class="spec">
+      <h4>提示条</h4>
+      <div class="demo" style="width:100%;flex-direction:column;align-items:stretch">
+        <div class="banner neutral"><span>中性说明：结存 = 累计入库 − 累计出库</span></div>
+        <div class="banner warn"><span>警告：出库数量不可超过当前结存</span></div>
+        <div class="banner crit"><span>错误：当前结存为 3，超出 2</span></div>
+      </div>
+      <p>三种语义各一色，图标 + 文字双通道表达，不依赖颜色单独区分。</p>
+    </div>
+  </div>
+
+  <div class="sec-head"><h2>关键交互说明</h2></div>
+  <div class="card">
+    <div class="card-body">
+      <dl class="dl" style="grid-template-columns:120px 1fr">
+        <dt>拼音码联想</dt><dd>输入即模糊匹配，↑ ↓ 选择、Enter 选中；<b>唯一匹配时自动选中</b>，多个匹配时下拉列出全部（拼音码不唯一）</dd>
+        <dt>连续录入</dt><dd>入库提交后表单清空、焦点回到拼音码框，可不离开页面连续录入下一条</dd>
+        <dt>超库存拦截</dt><dd>出库数量输入时实时比对结存，超出即红框提示并置灰提交按钮，同时给出「超出 N」的明确差额</dd>
+        <dt>出库对象</dt><dd>下拉选已有对象，或直接输入新名字，提交后自动加入对象列表</dd>
+        <dt>键盘操作</dt><dd><span class="mono">Ctrl+Enter</span> 提交，<span class="mono">Tab</span> 在数量与单价间跳转，<span class="mono">Esc</span> 关闭弹窗</dd>
+        <dt>不可变性</dt><dd>出入库记录只读，无编辑与删除入口；有出入库记录的物资与人员不可删除，仅可停用</dd>
+        <dt>响应式</dt><dd>≥1280px 完整布局；≤900px 单列；≤720px 隐藏侧边栏，表格转卡片，入出库页保持可用（现场用手机记一笔）</dd>
+      </dl>
+    </div>
+  </div>
+
+  <p style="margin-top:28px;font-size:12.5px;color:var(--ink-3);text-align:center">
+    物资系统 · UI 原型 v1.0 &nbsp;|&nbsp; 对应 PRD v1.0 &nbsp;|&nbsp; 纯静态 HTML/CSS/JS，无外部依赖
+  </p>
+
+</div>
+
+<div class="toast-wrap"></div>
+<script src="assets/app.js"></script>
+</body>
+</html>

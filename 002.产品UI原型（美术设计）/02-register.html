@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>注册 · 物资系统</title>
+<link rel="stylesheet" href="assets/theme.css">
+</head>
+<body>
+<div class="auth">
+
+  <section class="auth-brand">
+    <div class="bmark">资</div>
+    <h1>物资系统</h1>
+    <p class="lead">注册即可开始记录。默认权限为<b>普通用户</b>：可维护物资、录入出入库；<b>人员信息</b>模块仅管理员可见。</p>
+    <div class="auth-feats">
+      <div class="auth-feat"><span class="ck">✓</span><span>填写邮箱后，可自助找回密码</span></div>
+      <div class="auth-feat"><span class="ck">✓</span><span>注册后立即可用，无需等待审核</span></div>
+    </div>
+  </section>
+
+  <section class="auth-panel">
+    <div class="auth-form">
+      <h2>注册新账号</h2>
+      <p class="lead">请填写以下信息完成注册</p>
+
+      <form id="regForm">
+        <div class="field">
+          <label for="u">用户名<span class="req">*</span></label>
+          <input class="input" id="u" placeholder="3~20 位，字母 / 数字 / 下划线" autocomplete="username">
+          <div class="hint">登录名，注册后不可修改</div>
+        </div>
+
+        <div class="field">
+          <label for="n">姓名<span class="req">*</span></label>
+          <input class="input" id="n" placeholder="显示名，如 张三">
+        </div>
+
+        <div class="field">
+          <label for="p1">密码<span class="req">*</span></label>
+          <input class="input" id="p1" type="password" placeholder="6~20 位，至少含字母和数字">
+        </div>
+
+        <div class="field">
+          <label for="p2">确认密码<span class="req">*</span></label>
+          <input class="input" id="p2" type="password" placeholder="请再次输入密码">
+        </div>
+
+        <div class="field">
+          <label for="e">邮箱</label>
+          <input class="input" id="e" type="email" placeholder="选填，用于找回密码">
+          <div class="hint">绑定邮箱后可通过验证码自助重置密码</div>
+        </div>
+
+        <button class="btn primary lg block" type="submit">注册并登录</button>
+      </form>
+
+      <p class="alt">已有账号？<a href="01-login.html">返回登录</a></p>
+    </div>
+  </section>
+
+</div>
+
+<div class="toast-wrap"></div>
+
+<script src="assets/app.js"></script>
+<script>
+  document.getElementById('regForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var u = document.getElementById('u').value.trim();
+    var n = document.getElementById('n').value.trim();
+    var p1 = document.getElementById('p1').value;
+    var p2 = document.getElementById('p2').value;
+    var em = document.getElementById('e').value.trim();
+
+    if (!/^[A-Za-z0-9_]{3,20}$/.test(u)) { toast('用户名需为 3~20 位字母、数字或下划线', 'err'); return; }
+    if (u === 'admin') { toast('该用户名已被注册', 'err'); return; }
+    if (!n) { toast('请填写姓名', 'err'); return; }
+    if (p1.length < 6 || p1.length > 20 || !(/[A-Za-z]/.test(p1) && /[0-9]/.test(p1))) {
+      toast('密码需 6~20 位且至少包含字母和数字', 'err'); return;
+    }
+    if (p1 !== p2) { toast('两次输入的密码不一致', 'err'); return; }
+    if (em && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { toast('邮箱格式不正确', 'err'); return; }
+
+    toast('注册成功，已为你登录');
+    setTimeout(function(){ location.href = '05-home-stock.html'; }, 900);
+  });
+</script>
+</body>
+</html>

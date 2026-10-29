@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>人员信息 · 物资系统</title>
+<link rel="stylesheet" href="assets/theme.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">资</div>
+      <div>
+        <div class="brand-name">物资系统</div>
+        <div class="brand-sub">出入库管理</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <div class="nav-group-label">快捷操作</div>
+      <a class="nav-item" href="07-inbound-new.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>物资入库 <span class="tag">I</span></a>
+      <a class="nav-item" href="08-outbound-new.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></svg>物资出库 <span class="tag">O</span></a>
+      <div class="nav-group-label">查询</div>
+      <a class="nav-item" href="05-home-stock.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>库存总览</a>
+      <a class="nav-item" href="09-inbound-list.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>入库记录</a>
+      <a class="nav-item" href="10-outbound-list.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>出库记录</a>
+      <div class="nav-group-label">基础数据</div>
+      <a class="nav-item" href="06-items.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>物资档案</a>
+      <a class="nav-item" href="11-receivers.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>出库对象</a>
+      <a class="nav-item" href="12-users.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>人员信息 <span class="tag gray">仅管理员</span></a>
+    </nav>
+    <div class="side-foot">v1.0 · UI 原型</div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="crumb">物资系统 / <b>人员信息</b></div>
+      <div class="top-search">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input class="input" placeholder="搜索物资 / 订单号">
+      </div>
+      <div class="usermenu">
+        <div class="avatar">张</div>
+        <div><div class="who">张三</div><div class="role">管理员</div></div>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="page-head">
+        <div>
+          <h1>人员信息</h1>
+          <div class="sub">维护登录账号、角色与状态 —— 本模块仅管理员可见</div>
+        </div>
+        <div class="page-actions">
+          <button class="btn primary" onclick="openModal('mUser')">＋ 新增人员</button>
+        </div>
+      </div>
+
+      <div class="banner warn" style="margin-bottom:18px">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" style="flex:0 0 17px"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span><b>仅管理员可访问本页面。</b>普通用户登录后菜单中不显示「人员信息」入口，直接访问 URL 将返回无权限。</span>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <input class="input search" id="q" placeholder="用户名 / 姓名 / 邮箱">
+          <select class="select"><option>全部角色</option><option>管理员</option><option>普通用户</option></select>
+          <select class="select"><option>全部状态</option><option>启用</option><option>停用</option></select>
+        </div>
+
+        <div class="table-wrap">
+          <table class="tbl" id="tbl">
+            <thead>
+              <tr>
+                <th style="width:150px">用户名</th>
+                <th style="width:120px">姓名</th>
+                <th style="width:130px">角色</th>
+                <th style="width:220px">邮箱</th>
+                <th style="width:90px">状态</th>
+                <th style="width:140px">创建时间</th>
+                <th style="width:230px">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="mono" style="color:var(--ink-1);font-weight:600">admin</span></td>
+                <td class="strong">系统管理员</td>
+                <td><span class="badge info">管理员</span></td>
+                <td class="muted">—</td>
+                <td><span class="badge ok"><span class="dot"></span>启用</span></td>
+                <td class="muted">2026-10-20</td>
+                <td><div class="rowacts"><button class="btn" onclick="openModal('mReset')">重置密码</button><button class="btn" disabled title="内置账号不可停用">停用</button><button class="btn" disabled title="内置账号不可删除">删除</button></div></td>
+              </tr>
+              <tr>
+                <td><span class="mono" style="color:var(--ink-1);font-weight:600">zhangsan</span></td>
+                <td class="strong">张三</td>
+                <td><span class="badge info">管理员</span></td>
+                <td class="muted">zhangsan@example.com</td>
+                <td><span class="badge ok"><span class="dot"></span>启用</span></td>
+                <td class="muted">2026-10-20</td>
+                <td><div class="rowacts"><button class="btn" onclick="openModal('mReset')">重置密码</button><button class="btn" onclick="toast('已停用账号：zhangsan')">停用</button><button class="btn" disabled title="该用户有操作记录，请改为停用">删除</button></div></td>
+              </tr>
+              <tr>
+                <td><span class="mono" style="color:var(--ink-1);font-weight:600">lisi</span></td>
+                <td class="strong">李四</td>
+                <td><span class="badge">普通用户</span></td>
+                <td class="muted">—</td>
+                <td><span class="badge ok"><span class="dot"></span>启用</span></td>
+                <td class="muted">2026-10-21</td>
+                <td><div class="rowacts"><button class="btn" onclick="openModal('mReset')">重置密码</button><button class="btn" onclick="toast('已停用账号：lisi')">停用</button><button class="btn" disabled title="该用户有操作记录，请改为停用">删除</button></div></td>
+              </tr>
+              <tr>
+                <td><span class="mono" style="color:var(--ink-1);font-weight:600">wangwu</span></td>
+                <td class="strong">王五</td>
+                <td><span class="badge">普通用户</span></td>
+                <td class="muted">wangwu@example.com</td>
+                <td><span class="badge ok"><span class="dot"></span>启用</span></td>
+                <td class="muted">2026-10-22</td>
+                <td><div class="rowacts"><button class="btn" onclick="openModal('mReset')">重置密码</button><button class="btn" onclick="toast('已停用账号：wangwu')">停用</button><button class="btn" disabled title="该用户有操作记录，请改为停用">删除</button></div></td>
+              </tr>
+              <tr>
+                <td><span class="mono" style="color:var(--ink-1);font-weight:600">zhaoliu</span></td>
+                <td class="strong">赵六</td>
+                <td><span class="badge">普通用户</span></td>
+                <td class="muted">—</td>
+                <td><span class="badge ok"><span class="dot"></span>启用</span></td>
+                <td class="muted">2026-10-24</td>
+                <td><div class="rowacts"><button class="btn" onclick="openModal('mReset')">重置密码</button><button class="btn" onclick="toast('已停用账号：zhaoliu')">停用</button><button class="btn" onclick="toast('已删除账号：zhaoliu')">删除</button></div></td>
+              </tr>
+              <tr>
+                <td><span class="mono" style="color:var(--ink-3)">sunqi</span></td>
+                <td class="strong muted">孙七</td>
+                <td><span class="badge">普通用户</span></td>
+                <td class="muted">—</td>
+                <td><span class="badge warn"><span class="dot"></span>停用</span></td>
+                <td class="muted">2026-10-18</td>
+                <td><div class="rowacts"><button class="btn" onclick="openModal('mReset')">重置密码</button><button class="btn" onclick="toast('已启用账号：sunqi')">启用</button><button class="btn" disabled title="该用户有操作记录，请改为停用">删除</button></div></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="empty" data-filter-empty style="display:none">
+            <div class="ei"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
+            <h4>没有匹配的人员</h4><p>换个关键词试试</p>
+          </div>
+        </div>
+
+        <div class="pager">
+          <span>共 6 条 · 5 个启用 · 1 个停用</span>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ============ 新增人员 ============ -->
+<div class="overlay" id="mUser">
+  <div class="modal">
+    <div class="modal-head"><h3>新增人员</h3><span class="x" data-close="mUser">&times;</span></div>
+    <div class="modal-body">
+      <form id="userForm">
+        <div class="field">
+          <label for="u_user">用户名<span class="req">*</span></label>
+          <input class="input mono" id="u_user" placeholder="3~20 位，字母 / 数字 / 下划线">
+          <div class="hint">登录名，创建后不可修改</div>
+        </div>
+        <div class="field">
+          <label for="u_name">姓名<span class="req">*</span></label>
+          <input class="input" id="u_name" placeholder="显示名，如 张三">
+        </div>
+        <div class="field">
+          <label for="u_pwd">初始密码<span class="req">*</span></label>
+          <input class="input" id="u_pwd" type="text" value="wz123456">
+          <div class="hint">6~20 位，至少含字母和数字；创建后由管理员转告本人，首次登录提示修改</div>
+        </div>
+        <div class="field">
+          <label for="u_mail">邮箱</label>
+          <input class="input" id="u_mail" type="email" placeholder="选填，绑定后可自助找回密码">
+        </div>
+        <div class="field-row" style="margin-bottom:0">
+          <div class="field">
+            <label for="u_role">角色<span class="req">*</span></label>
+            <select class="select" id="u_role">
+              <option>普通用户</option>
+              <option>管理员</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="u_status">状态<span class="req">*</span></label>
+            <select class="select" id="u_status">
+              <option>启用</option>
+              <option>停用</option>
+            </select>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close="mUser">取消</button>
+      <button class="btn primary" onclick="saveUser()">创建</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 重置密码 ============ -->
+<div class="overlay" id="mReset">
+  <div class="modal" style="width:420px">
+    <div class="modal-head"><h3>重置密码</h3><span class="x" data-close="mReset">&times;</span></div>
+    <div class="modal-body">
+      <div class="banner warn" style="margin-bottom:16px">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" style="flex:0 0 17px"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span>重置后该用户的<b>旧密码立即失效</b>，所有已登录会话同时失效。</span>
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label for="r_pwd">新密码<span class="req">*</span></label>
+        <input class="input" id="r_pwd" type="text" value="wz123456">
+        <div class="hint">6~20 位，至少含字母和数字</div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" data-close="mReset">取消</button>
+      <button class="btn primary" onclick="closeModal('mReset'); toast('密码已重置')">确认重置</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-wrap"></div>
+
+<script src="assets/app.js"></script>
+<script>
+  initFilter('#q', '#tbl');
+
+  function saveUser() {
+    var u = document.getElementById('u_user').value.trim();
+    var n = document.getElementById('u_name').value.trim();
+    var p = document.getElementById('u_pwd').value;
+    if (!/^[A-Za-z0-9_]{3,20}$/.test(u)) { toast('用户名需为 3~20 位字母、数字或下划线', 'err'); return; }
+    if (!n) { toast('请填写姓名', 'err'); return; }
+    if (p.length < 6 || p.length > 20 || !(/[A-Za-z]/.test(p) && /[0-9]/.test(p))) {
+      toast('密码需 6~20 位且至少包含字母和数字', 'err'); return;
+    }
+    closeModal('mUser');
+    toast('人员已创建：' + u);
+  }
+</script>
+</body>
+</html>

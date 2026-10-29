@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>登录 · 物资系统</title>
+<link rel="stylesheet" href="assets/theme.css">
+</head>
+<body>
+<div class="auth">
+
+  <!-- 左侧品牌区 -->
+  <section class="auth-brand">
+    <div class="bmark">资</div>
+    <h1>物资系统</h1>
+    <p class="lead">轻量的物资出入库台账。用<b>拼音码</b>定位物资，录入数量与订单号，一笔记录 5 秒完成。</p>
+    <div class="auth-feats">
+      <div class="auth-feat"><span class="ck">✓</span><span>拼音码快速检索，入库 / 出库不再翻找</span></div>
+      <div class="auth-feat"><span class="ck">✓</span><span>品名、单位、零售价、购买平台一次建档</span></div>
+      <div class="auth-feat"><span class="ck">✓</span><span>结存实时计算，库存去向逐笔可查</span></div>
+    </div>
+  </section>
+
+  <!-- 右侧表单区 -->
+  <section class="auth-panel">
+    <div class="auth-form">
+      <h2>登录</h2>
+      <p class="lead">请使用您的账号登录物资系统</p>
+
+      <form id="loginForm">
+        <div class="field">
+          <label for="u">用户名</label>
+          <input class="input" id="u" value="admin" placeholder="请输入用户名" autocomplete="username">
+        </div>
+
+        <div class="field">
+          <label for="p">密码</label>
+          <input class="input" id="p" type="password" value="admin" placeholder="请输入密码" autocomplete="current-password">
+        </div>
+
+        <div class="auth-row">
+          <label style="display:flex;gap:7px;align-items:center;cursor:pointer;color:var(--ink-2)">
+            <input type="checkbox" checked style="accent-color:var(--accent)"> 记住我
+          </label>
+          <a href="03-forgot-password.html">忘记密码？</a>
+        </div>
+
+        <button class="btn primary lg block" type="submit">登录</button>
+      </form>
+
+      <div class="banner neutral" style="margin-top:18px;align-items:center">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="flex:0 0 16px"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span>系统初始账号 <b class="mono">admin</b> / 密码 <b class="mono">admin</b>，首次登录后需修改密码。</span>
+      </div>
+
+      <p class="alt">还没有账号？<a href="02-register.html">注册新账号</a></p>
+    </div>
+  </section>
+
+</div>
+
+<div class="toast-wrap"></div>
+
+<script src="assets/app.js"></script>
+<script>
+  document.getElementById('loginForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var u = document.getElementById('u').value.trim();
+    var p = document.getElementById('p').value;
+    if (!u || !p) { toast('请输入用户名和密码', 'err'); return; }
+    if (u === 'admin' && p === 'admin') {
+      toast('登录成功，正在进入修改密码…');
+      setTimeout(function(){ location.href = '04-change-password.html'; }, 900);
+    } else {
+      toast('用户名或密码错误', 'err');
+    }
+  });
+</script>
+</body>
+</html>

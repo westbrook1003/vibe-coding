@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>物资入库 · 物资系统</title>
+<link rel="stylesheet" href="assets/theme.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">资</div>
+      <div>
+        <div class="brand-name">物资系统</div>
+        <div class="brand-sub">出入库管理</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <div class="nav-group-label">快捷操作</div>
+      <a class="nav-item" href="07-inbound-new.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>物资入库 <span class="tag">I</span></a>
+      <a class="nav-item" href="08-outbound-new.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></svg>物资出库 <span class="tag">O</span></a>
+      <div class="nav-group-label">查询</div>
+      <a class="nav-item" href="05-home-stock.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>库存总览</a>
+      <a class="nav-item" href="09-inbound-list.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>入库记录</a>
+      <a class="nav-item" href="10-outbound-list.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>出库记录</a>
+      <div class="nav-group-label">基础数据</div>
+      <a class="nav-item" href="06-items.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>物资档案</a>
+      <a class="nav-item" href="11-receivers.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>出库对象</a>
+      <a class="nav-item" href="12-users.html"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>人员信息 <span class="tag gray">仅管理员</span></a>
+    </nav>
+    <div class="side-foot">v1.0 · UI 原型</div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="crumb">物资系统 / <b>物资入库</b></div>
+      <div class="top-search">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input class="input" placeholder="搜索物资 / 订单号">
+      </div>
+      <div class="usermenu">
+        <div class="avatar">张</div>
+        <div><div class="who">张三</div><div class="role">管理员</div></div>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="page-head">
+        <div>
+          <h1>物资入库</h1>
+          <div class="sub">输入拼音码定位物资，填写数量与订单编号即可完成一次入库</div>
+        </div>
+        <div class="page-actions">
+          <a class="btn" href="09-inbound-list.html">查看入库记录</a>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:18px;align-items:start">
+
+        <!-- ============ 左：录入表单 ============ -->
+        <div class="card">
+          <div class="card-head">
+            <h3>新增入库</h3>
+            <span class="badge info">录入人：张三</span>
+            <div class="right"><span class="sub">2026-10-26 12:30</span></div>
+          </div>
+          <div class="card-body">
+
+            <div class="field">
+              <label for="py">拼音码<span class="req">*</span></label>
+              <div class="suggest-wrap">
+                <input class="input mono" id="py" placeholder="输入拼音码，如 wsm" autocomplete="off" value="wsm">
+                <div class="suggest" id="sg"></div>
+              </div>
+              <div class="hint">↑ ↓ 选择 · Enter 选中 · 支持多码，如 <span class="mono">wsm,sb</span></div>
+            </div>
+
+            <!-- 已选物资摘要 -->
+            <div id="picked" style="margin-bottom:18px">
+              <div class="picked">
+                <span class="pico">鼠</span>
+                <span class="pmain">
+                  <span class="pn">无线鼠标</span>
+                  <span class="pp">单位 <b>个</b> · 零售价 <b>¥29.90</b> · 购买平台 <b>淘宝</b></span>
+                </span>
+                <span class="pstock">
+                  <span class="pv">3</span>
+                  <span class="pl">当前结存</span>
+                </span>
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="qty">数量<span class="req">*</span></label>
+                <input class="input" id="qty" type="number" min="0" step="0.001" value="2">
+                <div class="hint">支持小数，最多 3 位</div>
+              </div>
+              <div class="field">
+                <label for="ord">订单编号<span class="req">*</span></label>
+                <input class="input mono" id="ord" placeholder="如 20261026T12345" value="20261026T12345">
+                <div class="hint">可重复（同一订单分批到货）</div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="amt">入库金额</label>
+              <input class="input" id="amt" readonly value="¥59.80">
+              <div class="hint">= 数量 × 零售价（只读）</div>
+            </div>
+
+            <div class="field" style="margin-bottom:0">
+              <label for="rmk">备注</label>
+              <input class="input" id="rmk" placeholder="选填，≤100 字">
+            </div>
+
+            <div style="display:flex;gap:9px;margin-top:22px;padding-top:18px;border-top:1px solid var(--line)">
+              <button class="btn primary lg" id="submitOne">提交本条 <span class="k">Ctrl+Enter</span></button>
+              <button class="btn lg" id="submitMore">提交并继续录入下一条</button>
+              <a class="btn ghost lg" href="05-home-stock.html" style="margin-left:auto">取消</a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ============ 右：辅助信息 ============ -->
+        <div style="display:flex;flex-direction:column;gap:14px">
+
+          <div class="card">
+            <div class="card-head"><h3>录入说明</h3></div>
+            <div class="card-body" style="font-size:13px;color:var(--ink-2);line-height:1.8">
+              <div style="display:flex;gap:9px;margin-bottom:9px">
+                <span class="badge info">1</span><span>输入<b>拼音码</b>，唯一匹配时自动选中</span>
+              </div>
+              <div style="display:flex;gap:9px;margin-bottom:9px">
+                <span class="badge info">2</span><span>核对带出的<b>品名 / 单位 / 零售价 / 平台</b></span>
+              </div>
+              <div style="display:flex;gap:9px;margin-bottom:9px">
+                <span class="badge info">3</span><span>填写<b>数量</b>与<b>订单编号</b>，回车提交</span>
+              </div>
+              <div style="display:flex;gap:9px">
+                <span class="badge info">4</span><span>提交后表单清空，可<b>连续录入</b></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <h3>最近入库</h3>
+              <div class="right"><a class="btn sm ghost" href="09-inbound-list.html">全部</a></div>
+            </div>
+            <div class="card-body" style="padding:0">
+              <table class="tbl">
+                <tbody>
+                  <tr><td><b>无线鼠标</b><br><span class="muted" style="font-size:12px">12:30 · 京东</span></td>
+                      <td class="num strong">×2</td><td class="num muted">¥59.80</td></tr>
+                  <tr><td><b>数据线</b><br><span class="muted" style="font-size:12px">10:02 · 拼多多</span></td>
+                      <td class="num strong">×5</td><td class="num muted">¥64.50</td></tr>
+                  <tr><td><b>A4 纸</b><br><span class="muted" style="font-size:12px">09-25 · 京东</span></td>
+                      <td class="num strong">×10</td><td class="num muted">¥230.00</td></tr>
+                  <tr><td><b>签字笔</b><br><span class="muted" style="font-size:12px">09-25 · 淘宝</span></td>
+                      <td class="num strong">×20</td><td class="num muted">¥70.00</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="banner neutral">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="flex:0 0 16px"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <span>入库记录<b>不可编辑、不可删除</b>，提交即计入结存。</span>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<div class="toast-wrap"></div>
+
+<script src="assets/app.js"></script>
+<script>
+  var current = { name: '无线鼠标', unit: '个', price: 29.9, platform: '淘宝', stock: 3 };
+
+  function renderPicked(it) {
+    current = it;
+    var el = document.getElementById('picked');
+    el.innerHTML =
+      '<div class="picked">' +
+        '<span class="pico">' + it.name.charAt(0) + '</span>' +
+        '<span class="pmain"><span class="pn">' + it.name + '</span>' +
+        '<span class="pp">单位 <b>' + it.unit + '</b> · 零售价 <b>¥' + it.price.toFixed(2) + '</b> · 购买平台 <b>' + it.platform + '</b></span></span>' +
+        '<span class="pstock"><span class="pv">' + it.stock + '</span><span class="pl">当前结存</span></span>' +
+      '</div>';
+    calc();
+  }
+
+  function calc() {
+    var q = parseFloat(document.getElementById('qty').value) || 0;
+    document.getElementById('amt').value = '¥' + (q * current.price).toFixed(2);
+  }
+  document.getElementById('qty').addEventListener('input', calc);
+
+  initSuggest('#py', '#sg', function (it) {
+    if (it.newItem) { toast('未找到「' + it.name + '」，请先在物资档案中建档', 'err'); return; }
+    renderPicked(it);
+  });
+
+  function doSubmit(keepOpen) {
+    var py = document.getElementById('py').value.trim();
+    var q = document.getElementById('qty').value;
+    var ord = document.getElementById('ord').value.trim();
+    if (!py) { toast('请输入拼音码', 'err'); return; }
+    if (q === '' || Number(q) <= 0) { toast('数量必须大于 0', 'err'); return; }
+    if (!ord) { toast('请填写订单编号', 'err'); return; }
+    toast('入库成功：' + current.name + ' ×' + q);
+    if (keepOpen) {
+      document.getElementById('qty').value = '';
+      document.getElementById('ord').value = '';
+      document.getElementById('py').value = '';
+      document.getElementById('py').focus();
+      calc();
+    } else {
+      setTimeout(function(){ location.href = '09-inbound-list.html'; }, 1000);
+    }
+  }
+
+  document.getElementById('submitOne').addEventListener('click', function () { doSubmit(false); });
+  document.getElementById('submitMore').addEventListener('click', function () { doSubmit(true); });
+
+  document.addEventListener('keydown', function (e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); doSubmit(true); }
+  });
+</script>
+</body>
+</html>

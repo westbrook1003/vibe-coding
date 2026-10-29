@@ -1,0 +1,50 @@
+# ---------- 依赖 ----------
+node_modules/
+.pnp
+.pnp.js
+
+# ---------- 构建产物 ----------
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# ---------- 环境变量与密钥 ----------
+.env
+.env.*
+!.env.example
+!.env.development
+!.env.production
+
+# ---------- 本地数据 ----------
+backend/data/
+data/
+*.sqlite
+*.sqlite-journal
+*.db
+
+# ---------- 日志 ----------
+*.log
+npm-debug.log*
+yarn-error.log*
+logs/
+
+# ---------- 缓存 ----------
+.cache/
+.vite/
+.eslintcache
+coverage/
+*.lcov
+
+# ---------- 编辑器 / 系统 ----------
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp
+
+# ---------- 临时文件 ----------
+tmp/
+temp/
+*.tmp
+*.bak
