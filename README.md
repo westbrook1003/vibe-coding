@@ -40,6 +40,22 @@ npm run dev:frontend    # http://localhost:5173
 
 见 [`CLAUDE.md`](CLAUDE.md) —— 包含常用命令、目录结构与若干必须遵守的跨层约定。
 
+## 推送到 GitHub
+
+本仓库已配置 **SSH** 远程地址（`git@github.com:westbrook1003/vibe-coding.git`），推送免密：
+
+```bash
+git push origin main          # 推分支
+git push origin v1           # 推标签
+```
+
+发布版本说明（Release）：
+
+```bash
+set GH_TOKEN=ghp_xxxxxxxx     # Windows：先设环境变量
+node docs/publish-release.js  # 正文取自 docs/RELEASE-v1.md
+```
+
 ## 版本
 
 | 标签 | 内容 |
